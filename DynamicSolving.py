@@ -13,15 +13,21 @@ if (m.sqrt(size) - int(m.sqrt(size))) != 0 or size <= 3: #check for possible mat
 
 dimension = int(m.sqrt(size))
 
+
+"""
 #Redefine A--install a row system 
-'''
+row = 0
 A = np.zeros(shape=(size,size))
-A = A + 0.25  #this is not true
+
+#Define 1/4 in this nested for loop
+for row in range(size):
+    for column in range(size):
+        
+
 for i in range(size):
-    A[i][i] = -1   
-    A[size-i-1][i] = 0
-    
-'''
+    A[i][i] = -1   #This is correct
+"""    
+
 
 B = np.zeros(shape = (size,1))
 # [X] = [A]^-1[B]
@@ -38,6 +44,8 @@ B[dimension-1][0] = (-T00-T10)*0.25
 B[(dimension)*(dimension-1)][0] = (-T01-T11)*0.25
 B[size-1][0] = (-T10-T11)*0.25
 
+'''
+#THIS IS NOT COMPLETE 
 for i in range(1,size):
     if i == (dimension - 1):
         continue
@@ -48,13 +56,14 @@ for i in range(1,size):
     if i < (dimension - 1): 
         B[i][0] = -T00*0.25
     if (dimension - 1) < i and i < dimension*(dimension -1):
-        if   #internal zero
-        if   #outside
+   #     if   #internal zero
+   #     if   #outside
             
         if i % (dimension) == 1:
             B[i][0] = -T10*0.25
     if i > dimension*(dimension - 1):
         B[i][0] = -T11*0.25
+'''
 
 X = np.linalg.solve(A,B)
 print(X)
