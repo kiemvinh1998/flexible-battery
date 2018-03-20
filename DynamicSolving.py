@@ -14,19 +14,53 @@ if (m.sqrt(size) - int(m.sqrt(size))) != 0 or size <= 3: #check for possible mat
 dimension = int(m.sqrt(size))
 
 
-"""
-#Redefine A--install a row system 
+
+#A is complete
 row = 0
 A = np.zeros(shape=(size,size))
 
 #Define 1/4 in this nested for loop
-for row in range(size):
-    for column in range(size):
-        
-
 for i in range(size):
-    A[i][i] = -1   #This is correct
-"""    
+    row = i // dimension
+    column = i % dimension
+    if row == 0:
+        if column == 0:
+            A[i][i+1] = 0.25
+            A[i][i+dimension] = 0.25
+        if 0 < column and column < (dimension - 1):
+            A[i][i-1] = 0.25
+            A[i][i+1] = 0.25
+            A[i][i+dimension] = 0.25
+        if column == (dimension-1):
+            A[i][i-1] = 0.25
+            A[i][i+dimension] = 0.25
+    if 0 < row and row < (dimension - 1):
+        if column == 0:
+            A[i][i+1] = 0.25
+            A[i][i+dimension] = 0.25
+            A[i][i-dimension] = 0.25
+        if 0 < column and column < (dimension - 1):
+            A[i][i-1] = 0.25
+            A[i][i+1] = 0.25
+            A[i][i+dimension] = 0.25
+            A[i][i-dimension] = 0.25
+        if column == (dimension-1):
+            A[i][i-1] = 0.25
+            A[i][i+dimension] = 0.25
+            A[i][i-dimension] = 0.25
+    if row == (dimension - 1):
+        if column == 0:
+            A[i][i+1] = 0.25
+            A[i][i-dimension] = 0.25
+        if 0 < column and column < (dimension - 1):
+            A[i][i-1] = 0.25
+            A[i][i+1] = 0.25
+            A[i][i-dimension] = 0.25
+        if column == (dimension - 1):
+            A[i][i-1] = 0.25
+            A[i][i-dimension] = 0.25    
+for i in range(size):
+    A[i][i] = -1
 
 
 B = np.zeros(shape = (size,1))
@@ -44,26 +78,22 @@ B[dimension-1][0] = (-T00-T10)*0.25
 B[(dimension)*(dimension-1)][0] = (-T01-T11)*0.25
 B[size-1][0] = (-T10-T11)*0.25
 
-'''
+
 #THIS IS NOT COMPLETE 
-for i in range(1,size):
-    if i == (dimension - 1):
-        continue
-    if i == dimension*(dimension-1):
-        continue
-    if i == size - 1: 
-        continue
-    if i < (dimension - 1): 
-        B[i][0] = -T00*0.25
-    if (dimension - 1) < i and i < dimension*(dimension -1):
-   #     if   #internal zero
-   #     if   #outside
-            
-        if i % (dimension) == 1:
+for i in range(size):
+    row = i // dimension
+    col = i % dimension
+    if row == 0:
+        if 0 < col and col < (dimension - 1):
+            B[i][0] = -T00*0.25
+    if 0 < row and row < (dimension - 1):
+        if col == 0:
+            B[i][0] = -T01*0.25
+        if col == (dimension - 1):
             B[i][0] = -T10*0.25
-    if i > dimension*(dimension - 1):
-        B[i][0] = -T11*0.25
-'''
+    if row == (dimension - 1):
+        if 0 < col and col < (dimension - 1):
+            B[i][0] = -T11*0.25
 
 X = np.linalg.solve(A,B)
 print(X)
