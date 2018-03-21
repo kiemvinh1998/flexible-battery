@@ -79,7 +79,7 @@ B[(dimension)*(dimension-1)][0] = (-T01-T11)*0.25
 B[size-1][0] = (-T10-T11)*0.25
 
 
-#THIS IS NOT COMPLETE 
+
 for i in range(size):
     row = i // dimension
     col = i % dimension
