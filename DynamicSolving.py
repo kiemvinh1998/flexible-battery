@@ -104,5 +104,18 @@ for i in range(size):
         if 0 < col and col < (dimension - 1):
             B[i][0] = -T11*0.25
 
-X = np.linalg.solve(A,B)
+X = np.linalg.solve(A,B)  #display the temperature of each not 
+"""
+The position of each node is numbered as below:
+                  T00
+           -----------------
+           |---0---1---2---|
+      T01  |---3---4---5---|  T10
+           |---6---7---8---|
+           |---9--10--11---|
+           |---12--13- 14--|
+           ----15--16--17--
+                
+                T11
+"""
 print(X)
