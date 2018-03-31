@@ -1,14 +1,23 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Mar 18 03:08:00 2018
-
-@author: Vinh Huynh
+This program is to solve steady state heat transfer boundary condition using finite difference method and Linear Algebra to find
+the temperature at each node.
+        
+                T00
+           -----------------
+           |---|---|---|---|
+      T01  |---|---|---|---|  T10
+           |---|---|---|---|
+           |---|---|---|---|
+           |---|---|---|---|
+           -----------------
+                T11
 """
 
 import numpy as np 
 import math as m
 size = int(input("Please input the number of nodes (must larger than 3): "))
-if (m.sqrt(size) - int(m.sqrt(size))) != 0 or size <= 3: #check for possible matrix
+if (m.sqrt(size) - int(m.sqrt(size))) != 0 or size <= 3: #check if a square matrix
     print("\nThis is an invalid number of nodes since it has to be a square matrix")
 
 dimension = int(m.sqrt(size))
